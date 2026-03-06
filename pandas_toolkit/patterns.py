@@ -49,3 +49,23 @@ def find_duplicates(
     result = duplicate_rows[column].drop_duplicates()
 
     return pd.DataFrame({result_column_name: result})
+
+
+def delete_duplicates(
+    df: pd.DataFrame, sort_by: str | list, columns: str | list
+) -> pd.DataFrame:
+    """
+    Remove duplicate rows from a DataFrame based on specified columns.
+
+    Args:
+        df: Input DataFrame
+        sort_by: Column name or list of column names to sort by before deduplication.
+            Determines which row is kept when duplicates are found (lowest value wins).
+        columns: Column name or list of column names that must all match for a row to be considered a duplicate.
+            Multiple columns use AND logic - every specified column must match a previous row for it to be dropped.
+
+    Returns:
+        A new DataFrame with duplicates removed, sorted by sorty_by.
+
+    """
+    return df.sort_values(sort_by).drop_duplicates(subset=columns, keep="first")
