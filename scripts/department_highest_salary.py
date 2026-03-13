@@ -12,7 +12,9 @@ employee_table = pd.DataFrame(
 department_table = pd.DataFrame({"id": [1, 2], "name": ["IT", "Sales"]})
 
 
-def department_highest_salary(employee: pd.DataFrame, department: pd.DataFrame):
+def department_highest_salary(
+    employee: pd.DataFrame, department: pd.DataFrame
+) -> pd.DataFrame:
     merged_df = pd.merge(
         employee, department, left_on="departmentId", right_on="id", how="left"
     ).rename(columns={"name_x": "Employee", "name_y": "Department", "salary": "Salary"})

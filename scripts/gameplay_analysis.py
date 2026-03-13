@@ -16,7 +16,7 @@ activity = pd.DataFrame(
 )
 
 
-def game_analysis(activity: pd.DataFrame):
+def game_analysis(activity: pd.DataFrame) -> pd.DataFrame:
     df = activity.sort_values(by="event_date", ascending=True)
     df = (
         df.drop_duplicates(subset="player_id", keep="first")
